@@ -1,10 +1,125 @@
-body {
-    padding-top: 20px;
-    padding-bottom: 20px;
+/* Reset some basic elements for cross-browser consistency */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-pre {
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
     background-color: #f8f9fa;
+    color: #333;
+}
+
+/* Container styling */
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Heading styles */
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #007bff;
+    text-align: center;
+}
+
+/* Form styling */
+form {
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+}
+
+input[type="text"], select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    transition: border-color 0.2s;
+}
+
+input[type="text"]:focus, select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+}
+
+/* Button styling */
+button[type="submit"] {
+    display: inline-block;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s;
+}
+
+button[type="submit"]:hover {
+    background: #0056b3;
+}
+
+/* Result styling */
+pre {
+    background-color: #f1f1f1;
     padding: 15px;
-    border-radius: 5px;
+    border-radius: 4px;
+    margin-top: 20px;
+    overflow-x: auto;
+}
+
+/* Links styling */
+a.btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+a.btn-secondary {
+    background: #6c757d;
+    color: #fff;
+}
+
+a.btn-secondary:hover {
+    background: #5a6268;
+}
+
+a.btn-success {
+    background: #28a745;
+    color: #fff;
+}
+
+a.btn-success:hover {
+    background: #218838;
+}
+
+/* Footer styling */
+footer {
+    text-align: center;
+    margin-top: 30px;
+    padding: 10px;
+    background: #007bff;
+    color: #fff;
+    border-radius: 4px;
+    font-size: 0.9rem;
 }

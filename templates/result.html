@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compliance Result</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Compliance Result</h1>
+        <pre id="result">{{ result }}</pre>
+        <a class="btn btn-success mt-3" href="/audit/{{ audit_filename }}" download>Download Audit Report</a>
+        <a class="btn btn-primary mt-3" href="/">Check another contract</a>
+    </div>
+</body>
+</html>

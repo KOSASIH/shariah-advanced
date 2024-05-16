@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shariah Compliance Checker</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Shariah Compliance Checker</h1>
+        <form id="compliance-form" class="mt-4">
+            <div class="form-group">
+                <label for="smart_contract_name">Smart Contract Name (without .sol):</label>
+                <input type="text" class="form-control" id="smart_contract_name" name="smart_contract_name" required>
+            </div>
+            <div class="form-group">
+                <label for="smart_contract_version">Version:</label>
+                <input type="text" class="form-control" id="smart_contract_version" name="smart_contract_version" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Check Compliance</button>
+        </form>
+        <div id="result-container" class="mt-4" style="display: none;">
+            <h3>Compliance Result</h3>
+            <pre id="result"></pre>
+            <a id="download-link" class="btn btn-success mt-3" href="" download>Download Audit Report</a>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="/static/js/script.js"></script>
+</body>
+</html>

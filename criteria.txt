@@ -1,0 +1,262 @@
+# Define the criteria for Shariah compliance
+criteria = """
+1. No involvement in riba (interest): 
+    - The contract must not include any clauses that involve the payment or receipt of interest.
+    - Example: A loan agreement where the lender charges interest on the principal amount.
+
+2. No involvement in maysir (gambling): 
+    - The contract must not involve any forms of gambling or speculative transactions.
+    - Example: A contract that includes clauses for betting on uncertain future events, such as stock price movements.
+
+3. No involvement in gharar (excessive uncertainty): 
+    - The contract must avoid excessive uncertainty and ambiguity in its terms and conditions.
+    - Example: A contract for the sale of goods where the quantity or quality of goods is not clearly defined.
+
+4. The contract must not involve prohibited (haram) activities: 
+    - This includes activities such as alcohol production, pork-related products, and any other haram activities.
+    - Example: A partnership agreement to operate a business that sells alcoholic beverages.
+
+5. The contract must ensure justice and fairness: 
+    - The terms of the contract should be fair to all parties involved and should not result in unjust enrichment or exploitation.
+    - Example: An employment contract where the employee's wages are significantly below market rates without a justifiable reason.
+
+6. No unethical exploitation: 
+    - The contract should not exploit any party's lack of knowledge, desperation, or weakness.
+    - Example: A contract with excessively high penalties for late payments, taking advantage of a party's financial difficulties.
+
+7. Transparency and disclosure:
+    - All terms, conditions, and risks involved in the contract must be clearly disclosed to all parties.
+    - Example: A financial investment agreement where all potential risks and rewards are fully explained to the investor.
+
+8. Mutual consent:
+    - All parties must willingly and knowingly consent to the contract without any form of coercion or undue influence.
+    - Example: A contract signed under duress or with significant pressure from one party.
+
+9. Lawful purpose:
+    - The purpose of the contract must be lawful under Islamic law.
+    - Example: A contract for the sale of illegal drugs or other prohibited substances.
+
+10. Avoidance of conflict of interest:
+    - Parties involved in the contract must avoid situations where their personal interests conflict with their duties and obligations under the contract.
+    - Example: A procurement officer awarding a contract to a company they own shares in without disclosing this interest.
+
+11. Clarity in compensation:
+    - The compensation or remuneration for services or goods provided must be clearly defined and agreed upon by all parties.
+    - Example: A service contract where the payment terms are vague or open to interpretation.
+
+12. Avoidance of speculation (gharar):
+    - Contracts should not involve excessive speculation where the outcome is highly uncertain.
+    - Example: A futures contract in commodities where neither party has a genuine intention to deliver or receive the goods, but rather to profit from price movements.
+
+13. Ethical investment:
+    - The funds involved in the contract should not be invested in businesses or activities that are considered haram.
+    - Example: An investment agreement where the funds are used to support a casino or gambling operation.
+
+14. Profit and loss sharing:
+    - In partnership agreements, profits and losses should be shared according to the agreed-upon ratio, and not in a manner that disproportionately benefits one party.
+    - Example: A partnership where one partner unfairly receives a fixed profit regardless of the business performance.
+
+15. Purpose and intention:
+    - The contract should have a clear, lawful purpose, and the intention behind the contract should be ethical and in line with Islamic principles.
+    - Example: A contract intended to deceive or defraud another party.
+
+16. Non-involvement in unethical marketing or sales practices:
+    - The contract should not involve misleading or deceptive marketing or sales practices.
+    - Example: A contract where one party sells a product by making false claims about its benefits.
+
+17. No exploitation of natural resources in a harmful manner:
+    - The contract should not involve the exploitation of natural resources in a way that causes significant harm to the environment.
+    - Example: A mining contract that does not include measures to prevent environmental degradation.
+
+18. Respect for intellectual property:
+    - The contract should respect intellectual property rights and not involve the unauthorized use of protected materials.
+    - Example: A software licensing agreement where one party uses pirated software.
+
+19. Responsibility and accountability:
+    - Each party should clearly outline their responsibilities and be held accountable for their actions under the contract.
+    - Example: A construction contract where the contractor is not held accountable for substandard work.
+
+20. Prohibition of interest-based financial products:
+    - The contract should not involve interest-based financial products such as conventional bonds or savings accounts.
+    - Example: A corporate bond that pays fixed interest to bondholders.
+
+21. Prohibition of trading in debt:
+    - The contract should not involve the trading of debt at a value different from its face value.
+    - Example: A contract where a party buys or sells a loan or debt for a price other than its nominal value.
+
+22. Avoidance of excessive uncertainty in delivery or performance:
+    - The contract must clearly specify the terms of delivery and performance to avoid uncertainty.
+    - Example: A service contract that does not specify the exact timeline or milestones for completion.
+
+23. No unfair termination clauses:
+    - The contract should not have clauses that allow one party to terminate the agreement unfairly or without just cause.
+    - Example: An employment contract that allows the employer to terminate the employee at any time without reason or compensation.
+
+24. Prohibition of oppressive terms:
+    - The contract should not include terms that are oppressive or excessively one-sided.
+    - Example: A lease agreement where the landlord imposes excessively high penalties for minor infractions by the tenant.
+
+25. Compliance with local laws:
+    - The contract should comply with the laws of the jurisdiction in which it is executed, provided these laws do not contradict Shariah principles.
+    - Example: A contract that disregards local regulations on safety or labor rights.
+
+26. Equitable risk distribution:
+    - The contract should ensure that risks are shared equitably among the parties.
+    - Example: A joint venture where one party bears all the financial risk while the other party benefits from profits without any risk.
+
+27. Proper documentation and record-keeping:
+    - The contract should require proper documentation and record-keeping to ensure transparency and accountability.
+    - Example: A financial contract that mandates regular audits and detailed financial reporting.
+
+28. Ethical dispute resolution:
+    - The contract should include provisions for resolving disputes in an ethical and fair manner, ideally through mediation or arbitration.
+    - Example: A business contract that includes a clause for resolving disputes through an Islamic arbitration body.
+
+29. Avoidance of interest-based derivatives:
+    - The contract should not involve derivatives or financial instruments that are based on interest.
+    - Example: A contract involving interest rate swaps or options based on interest-bearing assets.
+
+30. Promotion of social and environmental responsibility:
+    - The contract should promote social and environmental responsibility, ensuring that business practices do not harm society or the environment.
+    - Example: A manufacturing contract that includes clauses for sustainable practices and minimizing environmental impact.
+
+31. No compulsion in business transactions:
+    - All business transactions within the contract must be entered into voluntarily and without compulsion.
+    - Example: A sales contract where one party is forced to sell their property under duress.
+
+32. Fair profit margins:
+    - The contract should ensure that profit margins are fair and justifiable, avoiding excessive markups.
+    - Example: A resale contract where the resale price is significantly higher than the market value without justification.
+
+33. Avoidance of unfair trade practices:
+    - The contract should not involve unfair trade practices, such as monopolistic behavior or price-fixing.
+    - Example: A supply contract where the supplier agrees to sell only to certain buyers at inflated prices.
+
+34. Prohibition of bribery and corruption:
+    - The contract should not involve or facilitate any form of bribery or corruption.
+    - Example: A procurement contract where a party receives kickbacks for awarding the contract to a particular supplier.
+
+35. Protection of minority rights:
+    - The contract should ensure the protection of minority rights within business entities, such as in partnerships or joint ventures.
+    - Example: A partnership agreement that unfairly limits the rights and profits of minority partners.
+
+36. Fair pricing mechanisms:
+    - The contract should include fair pricing mechanisms that are transparent and justifiable.
+    - Example: A service contract where the pricing is based on a clear and fair cost structure rather than arbitrary fees.
+
+37. Avoidance of ambiguity in financial terms:
+    - All financial terms and obligations should be clearly defined to avoid ambiguity.
+    - Example: A loan agreement where the repayment schedule and amounts are not clearly specified.
+
+38. Promotion of ethical business conduct:
+    - The contract should promote ethical business conduct and adherence to high ethical standards.
+    - Example: A business contract that includes a code of ethics or conduct for all parties involved.
+
+39. Inclusivity and non-discrimination:
+    - The contract should promote inclusivity and non-discrimination in business practices.
+    - Example: An employment contract that ensures equal opportunity and non-discrimination based on race, gender, or religion.
+
+40. Clear definition of roles and responsibilities:
+    - The contract should clearly define the roles and responsibilities of all parties to prevent misunderstandings.
+    - Example: A partnership agreement that outlines the specific duties and contributions of each partner.
+
+41. No speculative sales (bai’ al-gharar):
+    - The contract should not involve sales of items that do not exist or cannot be delivered.
+    - Example: Selling goods that the seller does not own or have the ability to deliver at the time of the contract.
+
+42. Proper asset ownership (bai’ al-milkiyah):
+    - The contract must involve the sale or lease of assets that the seller actually owns and has the right to sell.
+    - Example: Selling a property that is not legally owned by the seller.
+
+43. No forward sales without ownership (bai’ al-salam):
+    - Forward sales are allowed only if the seller actually owns the goods being sold and can deliver them at the specified time.
+    - Example: Selling crops that have not yet been planted without proper conditions.
+
+44. Conditions of contract (shurut):
+    - The contract should include all necessary conditions to make it valid and enforceable under Islamic law.
+    - Example: A contract of sale that lacks clear conditions on delivery and payment terms.
+
+45. Ethical partnership structures (musharakah and mudarabah):
+    - Partnerships should be structured ethically, with clear terms on profit and loss sharing.
+    - Example: A mudarabah (investment partnership) where the investor unfairly dictates terms that minimize their risk while exposing the manager to higher risk.
+
+46. No unjust enrichment:
+    - The contract should not result in unjust enrichment of one party at the expense of another.
+    - Example: A loan agreement where the lender gains significantly more than the principal amount lent without any justification.
+
+47. Permissibility of the object (ma’qood alaih):
+    - The subject matter of the contract must be permissible under Shariah.
+    - Example: Selling prohibited items like alcohol or pork.
+
+48. Fair treatment of employees:
+    - Employment contracts should ensure fair treatment, wages, and working conditions.
+    - Example: An employment contract that requires excessive working hours without adequate compensation or rest periods.
+
+49. Socially responsible investing (SRI):
+    - Investments should be in socially responsible and ethical industries.
+    - Example: Avoiding investments in industries that harm the environment or public health.
+
+50. Transparency in partnership agreements:
+    - All terms of the partnership should be transparent and agreed upon by all partners.
+    - Example: A partnership agreement where one partner withholds critical financial information from the others.
+
+51. No involvement in usurious practices (riba al-fadl):
+    - The contract should avoid practices where one party gains an undue advantage over another.
+    - Example: A sale contract involving the exchange of unequal amounts of the same commodity.
+
+52. Avoidance of unjust monopolies (ihtikar):
+    - The contract should not create unjust monopolies that exploit consumers.
+    - Example: An exclusive supply agreement that prevents other suppliers from entering the market.
+
+53. Prohibition of haram financial instruments:
+    - The contract should not involve financial instruments that are considered haram, such as conventional insurance products.
+    - Example: Using conventional insurance to hedge against business risks instead of takaful (Islamic insurance).
+
+54. Proper due diligence:
+    - All parties should conduct proper due diligence to ensure the contract is fair and compliant with Shariah.
+    - Example: A merger agreement where one company fails to disclose significant liabilities to the other party.
+
+55. Avoidance of coercion and duress (ikrah):
+    - The contract must be entered into freely without any form of coercion or duress.
+    - Example: Forcing a party to sign a contract under threat of harm.
+
+56. Ethical financing (Qard al-Hasan):
+    - The contract may involve ethical, interest-free loans where repayment terms are just and charitable.
+    - Example: A loan agreement for community development projects that charges no interest.
+
+57. Prohibition of short selling:
+    - The contract should avoid short selling practices that involve selling borrowed assets.
+    - Example: A trading contract where a party sells shares they have borrowed in anticipation of buying them back at a lower price.
+
+58. Clear succession planning:
+    - Contracts involving partnerships or family businesses should include clear succession planning to avoid disputes.
+    - Example: A family business agreement that does not specify how shares will be distributed upon the death of a partner.
+
+59. No involvement in impermissible contracts (batil contracts):
+    - The contract must not involve any impermissible or void contracts under Shariah.
+    - Example: A contract involving fraudulent misrepresentation or illegal activities.
+
+60. Fair treatment of consumers:
+    - Consumer contracts should ensure fair treatment, transparency, and the provision of accurate information.
+    - Example: A sales contract where the seller provides misleading information about the product.
+
+61. Proper execution of contracts (ijab and qabul):
+    - The contract should be executed with a proper offer and acceptance.
+    - Example: A contract where the acceptance is not clearly communicated or documented.
+
+62. Equitable distribution of assets:
+    - In dissolution of partnerships, assets should be distributed equitably among partners.
+    - Example: A partnership dissolution agreement where one partner unfairly receives a larger share of the assets.
+
+63. Avoidance of conditions leading to disputes:
+    - The contract should avoid conditions that are likely to lead to disputes and disagreements.
+    - Example: Ambiguous terms in a rental agreement regarding maintenance responsibilities.
+
+64. Adherence to ethical labor practices:
+    - Contracts involving labor should adhere to ethical labor practices, including fair wages and working conditions.
+    - Example: A labor contract that does not comply with labor laws or ethical standards for worker treatment.
+
+65. Transparency in financial reporting:
+    - Contracts involving financial transactions should include requirements for transparent and accurate financial reporting.
+    - Example: A business contract where financial statements are not regularly audited or disclosed to partners.
+"""

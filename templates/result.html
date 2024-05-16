@@ -1,18 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compliance Result</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
     <div class="container">
         <h1 class="mt-5">Compliance Result</h1>
-        <pre id="result">{{ result }}</pre>
-        <a class="btn btn-success mt-3" href="/audit/{{ audit_filename }}" download>Download Audit Report</a>
-        <a class="btn btn-primary mt-3" href="/">Check another contract</a>
+        <div class="card mt-3">
+            <div class="card-body">
+                <pre>{{ result }}</pre>
+            </div>
+        </div>
+        <div class="mt-3">
+            <a href="/" class="btn btn-secondary">Check another contract</a>
+            {% if audit_filename %}
+                <a href="/audit/{{ audit_filename }}" class="btn btn-success">Download Audit Report</a>
+            {% endif %}
+        </div>
     </div>
+    <footer class="footer mt-auto py-3 bg-light">
+        <div class="container">
+            <span class="text-muted">&copy; 2024 Shariah Compliance Checker</span>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
 </body>
 </html>

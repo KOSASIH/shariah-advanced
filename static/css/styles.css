@@ -1,0 +1,10 @@
+body {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+pre {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+}

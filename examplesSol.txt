@@ -1,0 +1,1771 @@
+1. No involvement in riba (interest): 
+    - The contract must not include any clauses that involve the payment or receipt of interest.
+    - Example: A loan agreement where the lender charges interest on the principal amount.
+    - Solidity Example:
+      ```solidity
+      // Not compliant: Interest-based loan contract
+      contract InterestLoan {
+          uint256 public principal;
+          uint256 public interestRate;
+          address public lender;
+          address public borrower;
+
+          constructor(uint256 _principal, uint256 _interestRate) {
+              principal = _principal;
+              interestRate = _interestRate;
+              lender = msg.sender;
+          }
+
+          function lend(address _borrower) public {
+              borrower = _borrower;
+              // Interest calculation
+              uint256 interest = (principal * interestRate) / 100;
+              uint256 totalRepayment = principal + interest;
+              // Transfer the principal to the borrower
+              payable(borrower).transfer(principal);
+              // Repayment logic
+          }
+      }
+      ```
+
+2. No involvement in maysir (gambling): 
+    - The contract must not involve any forms of gambling or speculative transactions.
+    - Example: A contract that includes clauses for betting on uncertain future events, such as stock price movements.
+    - Solidity Example:
+      ```solidity
+      // Not compliant: Betting contract
+      contract Betting {
+          address public bettor1;
+          address public bettor2;
+          uint256 public betAmount;
+          uint256 public winningNumber;
+
+          function placeBet(uint256 _winningNumber) public payable {
+              require(msg.value == betAmount, "Bet amount must be equal");
+              if (bettor1 == address(0)) {
+                  bettor1 = msg.sender;
+              } else {
+                  bettor2 = msg.sender;
+                  winningNumber = _winningNumber;
+              }
+          }
+
+          function settleBet(uint256 _result) public {
+              require(_result == winningNumber, "Winning number must match");
+              if (_result == winningNumber) {
+                  payable(bettor1).transfer(address(this).balance);
+              } else {
+                  payable(bettor2).transfer(address(this).balance);
+              }
+          }
+      }
+      ```
+
+3. No involvement in gharar (excessive uncertainty): 
+    - The contract must avoid excessive uncertainty and ambiguity in its terms and conditions.
+    - Example: A contract for the sale of goods where the quantity or quality of goods is not clearly defined.
+    - Solidity Example:
+      ```solidity
+      // Not compliant: Sale of undefined goods
+      contract Sale {
+          uint256 public price;
+          address public seller;
+          address public buyer;
+          string public goods;
+
+          constructor(uint256 _price, string memory _goods) {
+              price = _price;
+              goods = _goods;
+              seller = msg.sender;
+          }
+
+          function buy() public payable {
+              require(msg.value == price, "Incorrect price");
+              buyer = msg.sender;
+              // Transfer ownership of goods (goods not clearly defined)
+          }
+      }
+      ```
+
+4. The contract must not involve prohibited (haram) activities: 
+    - This includes activities such as alcohol production, pork-related products, and any other haram activities.
+    - Example: A partnership agreement to operate a business that sells alcoholic beverages.
+    - Solidity Example:
+      ```solidity
+      // Not compliant: Alcohol business partnership
+      contract AlcoholBusiness {
+          address public partner1;
+          address public partner2;
+
+          constructor(address _partner1, address _partner2) {
+              partner1 = _partner1;
+              partner2 = _partner2;
+          }
+
+          function operate() public {
+              // Business logic for selling alcohol
+          }
+      }
+      ```
+
+5. The contract must ensure justice and fairness: 
+    - The terms of the contract should be fair to all parties involved and should not result in unjust enrichment or exploitation.
+    - Example: An employment contract where the employee's wages are significantly below market rates without a justifiable reason.
+    - Solidity Example:
+      ```solidity
+      // Compliant: Fair employment contract
+      contract Employment {
+          address public employer;
+          address public employee;
+          uint256 public salary;
+
+          constructor(address _employee, uint256 _salary) {
+              employer = msg.sender;
+              employee = _employee;
+              salary = _salary;
+          }
+
+          function paySalary() public {
+              require(msg.sender == employer, "Only employer can pay salary");
+              payable(employee).transfer(salary);
+          }
+      }
+      ```
+
+6. No unethical exploitation: 
+    - The contract should not exploit any party's lack of knowledge, desperation, or weakness.
+    - Example: A contract with excessively high penalties for late payments, taking advantage of a party's financial difficulties.
+    - Solidity Example:
+      ```solidity
+      // Not compliant: Exploitative contract with high penalties
+      contract ExploitativeContract {
+          uint256 public penalty;
+          address public debtor;
+
+          constructor(uint256 _penalty) {
+              penalty = _penalty;
+              debtor = msg.sender;
+          }
+
+          function imposePenalty() public {
+              // Apply high penalty to debtor
+              require(debtor.balance >= penalty, "Insufficient funds for penalty");
+              payable(address(this)).transfer(penalty);
+          }
+      }
+      ```
+
+7. Transparency and disclosure:
+    - All terms, conditions, and risks involved in the contract must be clearly disclosed to all parties.
+    - Example: A financial investment agreement where all potential risks and rewards are fully explained to the investor.
+    - Solidity Example:
+      ```solidity
+      // Compliant: Transparent investment agreement
+      contract Investment {
+          address public investor;
+          uint256 public investmentAmount;
+          string public riskDisclosure;
+
+          constructor(uint256 _investmentAmount, string memory _riskDisclosure) {
+              investmentAmount = _investmentAmount;
+              riskDisclosure = _riskDisclosure;
+              investor = msg.sender;
+          }
+
+          function invest() public payable {
+              require(msg.value == investmentAmount, "Incorrect investment amount");
+              // Disclose risks
+          }
+      }
+      ```
+
+8. Mutual consent:
+    - All parties must willingly and knowingly consent to the contract without any form of coercion or undue influence.
+    - Example: A contract signed under duress or with significant pressure from one party.
+    - Solidity Example:
+      ```solidity
+      // Compliant: Consent-based contract
+      contract ConsentContract {
+          address public party1;
+          address public party2;
+          bool public consent1;
+          bool public consent2;
+
+          constructor(address _party2) {
+              party1 = msg.sender;
+              party2 = _party2;
+          }
+
+          function giveConsent() public {
+              if (msg.sender == party1) {
+                  consent1 = true;
+              } else if (msg.sender == party2) {
+                  consent2 = true;
+              }
+          }
+
+          function isValid() public view returns (bool) {
+              return consent1 && consent2;
+          }
+      }
+      ```
+
+9. Lawful purpose:
+    - The purpose of the contract must be lawful under Islamic law.
+    - Example: A contract for the sale of illegal drugs or other prohibited substances.
+    - Solidity Example:
+      ```solidity
+      // Not compliant: Contract for illegal activity
+      contract IllegalSale {
+          address public seller;
+          address public buyer;
+          string public illegalGoods;
+
+          constructor(string memory _illegalGoods) {
+              seller = msg.sender;
+              illegalGoods = _illegalGoods;
+          }
+
+          function sell(address _buyer) public {
+              buyer = _buyer;
+              // Sale of illegal goods
+          }
+      }
+      ```
+
+10. Avoidance of conflict of interest:
+    - Parties involved in the contract must avoid situations where their personal interests conflict with their duties and obligations under the contract.
+    - Example: A procurement officer awarding a contract to a company they own shares in without disclosing this interest.
+    - Solidity Example:
+      ```solidity
+      // Not compliant: Conflict of interest in awarding contracts
+      contract Procurement {
+          address public officer;
+          address public vendor;
+          bool public conflictOfInterest;
+
+          constructor() {
+              officer = msg.sender;
+          }
+
+          function awardContract(address _vendor) public {
+              vendor = _vendor;
+              // Check for conflict of interest
+              conflictOfInterest = officer == vendor;
+          }
+      }
+      ```
+
+11. Clarity in compensation:
+    - The compensation or remuneration for services or goods provided must be clearly defined and agreed upon by all parties.
+    - Example: A service contract where the payment terms are vague or open to interpretation.
+    - Solidity Example:
+      ```solidity
+      // Compliant: Clear compensation agreement
+      contract ServiceContract {
+          address public provider;
+          address public client;
+          uint256 public fee;
+
+          constructor(address _client, uint256 _fee) {
+              provider = msg.sender;
+              client = _client;
+              fee = _fee;
+          }
+
+          function pay() public payable {
+              require(msg.value == fee, "Incorrect payment amount");
+              payable(provider).transfer(msg.value);
+          }
+      }
+      ```
+
+12. Avoidance of speculation (gharar):
+    - Contracts should not involve excessive speculation where the outcome is highly uncertain.
+    - Example: A futures contract in commodities where neither party has a genuine intention to deliver or receive the goods, but rather to profit from price movements.
+    - Solidity Example:
+      ```solidity
+      // Not compliant: Speculative futures contract
+      contract SpeculativeFutures {
+          address public party1;
+          address public party2;
+          uint256 public futurePrice;
+
+          constructor(uint256 _futurePrice) {
+              futurePrice = _futurePrice;
+              party1 = msg.sender;
+          }
+
+          function enterContract(address _party2) public {
+              party2 = _party2;
+          }
+
+          function settle(uint256 currentPrice) public {
+              // Settlement based on speculative price movement
+              if (currentPrice > futurePrice) {
+                  payable(party1).transfer(address(this).balance);
+              } else {
+                  payable(party2).transfer(address(this).balance);
+              }
+          }
+      }
+      ```
+
+13. Ethical investment:
+    - The funds involved in the contract should not be invested in businesses or activities that are considered haram.
+    - Example: An investment agreement where the funds are used to support a casino or gambling operation.
+    - Solidity Example:
+      ```solidity
+      // Not compliant: Investment in gambling business
+      contract GamblingInvestment {
+          address public investor;
+          address public business;
+          uint256 public amount;
+
+          constructor(address _business) {
+              investor = msg.sender;
+              business = _business;
+          }
+
+          function invest() public payable {
+              amount = msg.value;
+              // Investment in gambling business
+              payable(business).transfer(amount);
+          }
+      }
+      ```
+
+14. Profit and loss sharing:
+    - In partnership agreements, profits and losses should be shared according to the agreed-upon ratio, and not in a manner that disproportionately benefits one party.
+    - Example: A partnership where one partner unfairly receives a fixed profit regardless of the business performance.
+    - Solidity Example:
+      ```solidity
+      // Compliant: Fair profit and loss sharing
+      contract Partnership {
+          address public partner1;
+          address public partner2;
+          uint256 public capital1;
+          uint256 public capital2;
+          uint256 public profitShare1;
+          uint256 public profitShare2;
+
+          constructor(uint256 _capital1, uint256 _capital2) {
+              partner1 = msg.sender;
+              capital1 = _capital1;
+              capital2 = _capital2;
+              profitShare1 = (capital1 * 100) / (capital1 + capital2);
+              profitShare2 = 100 - profitShare1;
+          }
+
+          function distributeProfits(uint256 totalProfit) public {
+              uint256 profit1 = (totalProfit * profitShare1) / 100;
+              uint256 profit2 = (totalProfit * profitShare2) / 100;
+              payable(partner1).transfer(profit1);
+              payable(partner2).transfer(profit2);
+          }
+      }
+      ```
+
+15. Purpose and intention:
+    - The contract should have a clear, lawful purpose, and the intention behind the contract should be ethical and in line with Islamic principles.
+    - Example: A contract intended to deceive or defraud another party.
+    - Solidity Example:
+      ```solidity
+      // Not compliant: Fraudulent contract
+      contract FraudulentContract {
+          address public fraudster;
+          address public victim;
+          uint256 public amount;
+
+          constructor(address _victim, uint256 _amount) {
+              fraudster = msg.sender;
+              victim = _victim;
+              amount = _amount;
+          }
+
+          function deceive() public {
+              // Deceptive intention
+              payable(fraudster).transfer(amount);
+          }
+      }
+      ```
+
+16. Non-involvement in unethical marketing or sales practices:
+    - The contract should not involve misleading or deceptive marketing or sales practices.
+    - Example: A contract where one party sells a product by making false claims about its benefits.
+    - Solidity Example:
+      ```solidity
+      // Not compliant: Misleading sales contract
+      contract MisleadingSales {
+          address public seller;
+          address public buyer;
+          string public productDescription;
+
+          constructor(string memory _productDescription) {
+              seller = msg.sender;
+              productDescription = _productDescription;
+          }
+
+          function sell(address _buyer) public payable {
+              buyer = _buyer;
+              // Misleading product description
+              payable(seller).transfer(msg.value);
+          }
+      }
+      ```
+
+17. No exploitation of natural resources in a harmful manner:
+    - The contract should not involve the exploitation of natural resources in a way that causes significant harm to the environment.
+    - Example: A mining contract that does not include measures to prevent environmental degradation.
+    - Solidity Example:
+      ```solidity
+      // Not compliant: Environmentally harmful mining contract
+      contract HarmfulMining {
+          address public miner;
+          string public miningArea;
+
+          constructor(string memory _miningArea) {
+              miner = msg.sender;
+              miningArea = _miningArea;
+          }
+
+          function mine() public {
+              // Mining without environmental safeguards
+          }
+      }
+      ```
+
+18. Respect for intellectual property:
+    - The contract should respect intellectual property rights and not involve the unauthorized use of protected materials.
+    - Example: A software licensing agreement where one party uses pirated software.
+    - Solidity Example:
+      ```solidity
+      // Not compliant: Use of pirated software
+      contract PiratedSoftware {
+          address public user;
+          string public softwareName;
+
+          constructor(string memory _softwareName) {
+              user = msg.sender;
+              softwareName = _softwareName;
+          }
+
+          function useSoftware() public {
+              // Unauthorized use of protected software
+          }
+      }
+      ```
+
+19. Responsibility and accountability:
+    - Each party should clearly outline their responsibilities and be held accountable for their actions under the contract.
+    - Example: A construction contract where the contractor is not held accountable for substandard work.
+    - Solidity Example:
+      ```solidity
+      // Compliant: Accountable construction contract
+      contract Construction {
+          address public contractor;
+          address public client;
+          uint256 public budget;
+          string public projectDescription;
+
+          constructor(address _client, uint256 _budget, string memory _projectDescription) {
+              contractor = msg.sender;
+              client = _client;
+              budget = _budget;
+              projectDescription = _projectDescription;
+          }
+
+          function executeProject() public {
+              // Construction logic
+              // Ensuring accountability
+          }
+
+          function claimBudget() public {
+              require(msg.sender == contractor, "Only contractor can claim budget");
+              // Budget claim logic
+              payable(contractor).transfer(budget);
+          }
+      }
+      ```
+
+20. Prohibition of interest-based financial products:
+    - The contract should not involve interest-based financial products such as conventional bonds or savings accounts.
+    - Example: A corporate bond that pays fixed interest to bondholders.
+    - Solidity Example:
+      ```solidity
+      // Not compliant: Interest-based corporate bond
+      contract CorporateBond {
+          address public issuer;
+          address public bondholder;
+          uint256 public principal;
+          uint256 public interestRate;
+
+          constructor(uint256 _principal, uint256 _interestRate) {
+              issuer = msg.sender;
+              principal = _principal;
+              interestRate = _interestRate;
+          }
+
+          function issueBond(address _bondholder) public {
+              bondholder = _bondholder;
+              // Interest payment logic
+          }
+
+          function payInterest() public {
+              uint256 interest = (principal * interestRate) / 100;
+              payable(bondholder).transfer(interest);
+          }
+      }
+      ```
+
+21. Prohibition of trading in debt:
+    - The contract should not involve the trading of debt at a value different from its face value.
+    - Example: A contract where a party buys or sells a loan or debt for a price other than its nominal value.
+    - Solidity Example:
+      ```solidity
+      // Not compliant: Trading debt at a discount
+      contract DebtTrading {
+          address public seller;
+          address public buyer;
+          uint256 public debtAmount;
+          uint256 public salePrice;
+
+          constructor(uint256 _debtAmount, uint256 _salePrice) {
+              seller = msg.sender;
+              debtAmount = _debtAmount;
+              salePrice = _salePrice;
+          }
+
+          function sellDebt(address _buyer) public {
+              buyer = _buyer;
+              // Sale of debt at a discount
+              payable(seller).transfer(salePrice);
+          }
+      }
+      ```
+
+22. Avoidance of excessive uncertainty in delivery or performance:
+    - The contract must clearly specify the terms of delivery and performance to avoid uncertainty.
+    - Example: A service contract that does not specify the exact timeline or milestones for completion.
+    - Solidity Example:
+      ```solidity
+      // Compliant: Clear delivery and performance terms
+      contract ServiceDelivery {
+          address public provider;
+          address public client;
+          uint256 public fee;
+          string public serviceDescription;
+          uint256 public deliveryTime;
+
+          constructor(address _client, uint256 _fee, string memory _serviceDescription, uint256 _deliveryTime) {
+              provider = msg.sender;
+              client = _client;
+              fee = _fee;
+              serviceDescription = _serviceDescription;
+              deliveryTime = _deliveryTime;
+          }
+
+          function provideService() public {
+              require(block.timestamp <= deliveryTime, "Service delivery time exceeded");
+              // Service delivery logic
+          }
+
+          function payFee() public payable {
+              require(msg.value == fee, "Incorrect fee amount");
+              payable(provider).transfer(msg.value);
+          }
+      }
+      ```
+
+23. No unfair termination clauses:
+    - The contract should not have clauses that allow one party to terminate the agreement unfairly or without just cause.
+    - Example: An employment contract that allows the employer to terminate the employee at any time without reason or compensation.
+    - Solidity Example:
+      ```solidity
+      // Compliant: Fair termination clauses
+      contract EmploymentContract {
+          address public employer;
+          address public employee;
+          uint256 public salary;
+
+          constructor(address _employee, uint256 _salary) {
+              employer = msg.sender;
+              employee = _employee;
+              salary = _salary;
+          }
+
+          function terminateEmployment() public {
+              require(msg.sender == employer || msg.sender == employee, "Only employer or employee can terminate");
+              // Fair termination logic
+          }
+
+          function paySalary() public {
+              require(msg.sender == employer, "Only employer can pay salary");
+              payable(employee).transfer(salary);
+          }
+      }
+      ```
+
+24. Prohibition of oppressive terms:
+    - The contract should not include terms that are oppressive or excessively one-sided.
+    - Example: A lease agreement where the landlord imposes excessively high penalties for minor infractions by the tenant.
+    - Solidity Example:
+      ```solidity
+      // Not compliant: Oppressive lease terms
+      contract OppressiveLease {
+          address public landlord;
+          address public tenant;
+          uint256 public rent;
+          uint256 public penalty;
+
+          constructor(uint256 _rent, uint256 _penalty) {
+              landlord = msg.sender;
+              rent = _rent;
+              penalty = _penalty;
+          }
+
+          function payRent() public payable {
+              require(msg.value == rent, "Incorrect rent amount");
+              payable(landlord).transfer(msg.value);
+          }
+
+          function imposePenalty() public {
+              require(msg.sender == landlord, "Only landlord can impose penalty");
+              // Excessively high penalty for minor infractions
+              payable(landlord).transfer(penalty);
+          }
+      }
+      ```
+
+25. Compliance with local laws:
+    - The contract should comply with the laws of the jurisdiction in which it is executed, provided these laws do not contradict Shariah principles.
+    - Example: A contract that disregards local regulations on safety or labor rights.
+    - Solidity Example:
+      ```solidity
+      // Compliant: Local law compliance
+      contract LocalCompliance {
+          address public businessOwner;
+          string public businessActivity;
+
+          constructor(string memory _businessActivity) {
+              businessOwner = msg.sender;
+              businessActivity = _businessActivity;
+          }
+
+          function operate() public {
+              // Compliance with local regulations
+          }
+      }
+      ```
+
+26. Equitable risk distribution:
+    - The contract should ensure that risks are shared equitably among the parties.
+    - Example: A joint venture where one party bears all the financial risk while the other party benefits from profits without any risk.
+    - Solidity Example:
+      ```solidity
+      // Compliant: Equitable risk distribution
+      contract JointVenture {
+          address public partner1;
+          address public partner2;
+          uint256 public capital1;
+          uint256 public capital2;
+          uint256 public profitShare1;
+          uint256 public profitShare2;
+
+          constructor(uint256 _capital1, uint256 _capital2) {
+              partner1 = msg.sender;
+              capital1 = _capital1;
+              capital2 = _capital2;
+              profitShare1 = (capital1 * 100) / (capital1 + capital2);
+              profitShare2 = 100 - profitShare1;
+          }
+
+          function distributeProfits(uint256 totalProfit) public {
+              uint256 profit1 = (totalProfit * profitShare1) / 100;
+              uint256 profit2 = (totalProfit * profitShare2) / 100;
+              payable(partner1).transfer(profit1);
+              payable(partner2).transfer(profit2);
+          }
+
+          function shareRisk() public view returns (bool) {
+              // Ensure equitable risk sharing
+              return true;
+          }
+      }
+      ```
+
+27. Proper documentation and record-keeping:
+    - The contract should require proper documentation and record-keeping to ensure transparency and accountability.
+    - Example: A financial contract that mandates regular audits and detailed financial reporting.
+    - Solidity Example:
+      ```solidity
+      // Compliant: Proper documentation and record-keeping
+      contract Documentation {
+          address public owner;
+          mapping(uint256 => string) public records;
+
+          constructor() {
+              owner = msg.sender;
+          }
+
+          function addRecord(uint256 year, string memory record) public {
+              require(msg.sender == owner, "Only owner can add records");
+              records[year] = record;
+          }
+
+          function getRecord(uint256 year) public view returns (string memory) {
+              return records[year];
+          }
+      }
+      ```
+
+28. Ethical dispute resolution:
+    - The contract should include provisions for resolving disputes in an ethical and fair manner, ideally through mediation or arbitration.
+    - Example: A business contract that includes a clause for resolving disputes through an Islamic arbitration body.
+    - Solidity Example:
+      ```solidity
+      // Compliant: Ethical dispute resolution
+      contract DisputeResolution {
+          address public party1;
+          address public party2;
+
+          constructor(address _party2) {
+              party1 = msg.sender;
+              party2 = _party2;
+          }
+
+          function resolveDispute() public view returns (string memory) {
+              // Dispute resolution logic through mediation or arbitration
+              return "Dispute resolved ethically";
+          }
+      }
+      ```
+
+29. Avoidance of interest-based derivatives:
+    - The contract should not involve derivatives or financial instruments that are based on interest.
+    - Example: A contract involving interest rate swaps or options based on interest-bearing assets.
+    - Solidity Example:
+      ```solidity
+      // Not compliant: Interest-based derivative contract
+      contract InterestRateSwap {
+          address public party1;
+          address public party2;
+          uint256 public interestRate1;
+          uint256 public interestRate2;
+
+          constructor(uint256 _interestRate1, uint256 _interestRate2) {
+              party1 = msg.sender;
+              interestRate1 = _interestRate1;
+              interestRate2 = _interestRate2;
+          }
+
+          function swap() public {
+              // Interest rate swap logic
+          }
+      }
+      ```
+
+30. Promotion of social and environmental responsibility:
+    - The contract should promote social and environmental responsibility, ensuring that business practices do not harm society or the environment.
+    - Example: A manufacturing contract that includes clauses for sustainable practices and minimizing environmental impact.
+    - Solidity Example:
+      ```solidity
+      // Compliant: Social and environmental responsibility
+      contract SustainableManufacturing {
+          address public manufacturer;
+          string public product;
+
+          constructor(string memory _product) {
+              manufacturer = msg.sender;
+              product = _product;
+          }
+
+          function produce() public {
+              // Sustainable manufacturing practices
+          }
+      }
+      ```
+
+31. No compulsion in business transactions:
+    - All business transactions within the contract must be entered into voluntarily and without compulsion.
+    - Example: A sales contract where one party is forced to sell their property under duress.
+    - Solidity Example:
+      ```solidity
+      // Compliant: Voluntary business transaction
+      contract VoluntarySale {
+          address public seller;
+          address public buyer;
+          uint256 public price;
+
+          constructor(address _buyer, uint256 _price) {
+              seller = msg.sender;
+              buyer = _buyer;
+              price = _price;
+          }
+
+          function sell() public {
+              require(msg.sender == seller, "Only seller can initiate sale");
+              payable(seller).transfer(price);
+          }
+      }
+      ```
+
+32. Fair profit margins:
+    - The contract should ensure that profit margins are fair and justifiable, avoiding excessive markups.
+    - Example: A resale contract where the resale price is significantly higher than the market value without justification.
+    - Solidity Example:
+      ```solidity
+      // Compliant: Fair profit margins
+      contract FairPricing {
+          address public seller;
+          address public buyer;
+          uint256 public originalPrice;
+          uint256 public resalePrice;
+
+          constructor(uint256 _originalPrice, uint256 _resalePrice) {
+              seller = msg.sender;
+              originalPrice = _originalPrice;
+              resalePrice = _resalePrice;
+          }
+
+          function sell(address _buyer) public {
+              require(resalePrice <= originalPrice * 2, "Resale price exceeds fair margin");
+              buyer = _buyer;
+              payable(seller).transfer(resalePrice);
+          }
+      }
+      ```
+
+33. Avoidance of unfair trade practices:
+    - The contract should not involve unfair trade practices, such as monopolistic behavior or price-fixing.
+    - Example: A supply contract where the supplier agrees to sell only to certain buyers at inflated prices.
+    - Solidity Example:
+      ```solidity
+      // Not compliant: Unfair trade practices
+      contract UnfairTrade {
+          address public supplier;
+          address public buyer;
+          uint256 public price;
+
+          constructor(address _buyer, uint256 _price) {
+              supplier = msg.sender;
+              buyer = _buyer;
+              price = _price;
+          }
+
+          function sell() public {
+              // Monopolistic behavior or price-fixing
+              payable(supplier).transfer(price);
+          }
+      }
+      ```
+
+34. Prohibition of bribery and corruption:
+    - The contract should not involve or facilitate any form of bribery or corruption.
+    - Example: A procurement contract where a party receives kickbacks for awarding the contract to a particular supplier.
+    - Solidity Example:
+      ```solidity
+      // Not compliant: Bribery and corruption
+      contract Bribery {
+          address public officer;
+          address public supplier;
+          uint256 public kickbackAmount;
+
+          constructor(address _supplier, uint256 _kickbackAmount) {
+              officer = msg.sender;
+              supplier = _supplier;
+              kickbackAmount = _kickbackAmount;
+          }
+
+          function awardContract() public {
+              // Kickback logic
+              payable(officer).transfer(kickbackAmount);
+          }
+      }
+      ```
+
+35. Protection of minority rights:
+    - The contract should ensure the protection of minority rights within business entities, such as in partnerships or joint ventures.
+    - Example: A partnership agreement that unfairly limits the rights and profits of minority partners.
+    - Solidity Example:
+      ```solidity
+      // Compliant: Protection of minority rights
+      contract PartnershipRights {
+          address public majorityPartner;
+          address public minorityPartner;
+          uint256 public capitalMajority;
+          uint256 public capitalMinority;
+          uint256 public profitShareMajority;
+          uint256 public profitShareMinority;
+
+          constructor(uint256 _capitalMajority, uint256 _capitalMinority) {
+              majorityPartner = msg.sender;
+              capitalMajority = _capitalMajority;
+              capitalMinority = _capitalMinority;
+              profitShareMajority = (capitalMajority * 100) / (capitalMajority + capitalMinority);
+              profitShareMinority = 100 - profitShareMajority;
+          }
+
+          function distributeProfits(uint256 totalProfit) public {
+              uint256 profitMajority = (totalProfit * profitShareMajority) / 100;
+              uint256 profitMinority = (totalProfit * profitShareMinority) / 100;
+              payable(majorityPartner).transfer(profitMajority);
+              payable(minorityPartner).transfer(profitMinority);
+          }
+      }
+      ```
+
+36. Fair pricing mechanisms:
+    - The contract should include fair pricing mechanisms that are transparent and justifiable.
+    - Example: A service contract where the pricing is based on a clear and fair cost structure rather than arbitrary fees.
+    - Solidity Example:
+      ```solidity
+      // Compliant: Transparent pricing mechanisms
+      contract ServicePricing {
+          address public provider;
+          address public client;
+          uint256 public cost;
+          uint256 public markup;
+
+          constructor(uint256 _cost, uint256 _markup) {
+              provider = msg.sender;
+              cost = _cost;
+              markup = _markup;
+          }
+
+          function calculatePrice() public view returns (uint256) {
+              return cost + markup;
+          }
+
+          function pay() public payable {
+              require(msg.value == calculatePrice(), "Incorrect payment amount");
+              payable(provider).transfer(msg.value);
+          }
+      }
+      ```
+
+37. Avoidance of ambiguity in financial terms:
+    - All financial terms and obligations should be clearly defined to avoid ambiguity.
+    - Example: A loan agreement where the repayment schedule and amounts are not clearly specified.
+    - Solidity Example:
+      ```solidity
+      // Compliant: Clear financial terms
+      contract LoanAgreement {
+          address public lender;
+          address public borrower;
+          uint256 public principal;
+          uint256 public repaymentAmount;
+          uint256 public dueDate;
+
+          constructor(address _borrower, uint256 _principal, uint256 _repaymentAmount, uint256 _dueDate) {
+              lender = msg.sender;
+              borrower = _borrower;
+              principal = _principal;
+              repaymentAmount = _repaymentAmount;
+              dueDate = _dueDate;
+          }
+
+          function repay() public payable {
+              require(msg.sender == borrower, "Only borrower can repay");
+              require(msg.value == repaymentAmount, "Incorrect repayment amount");
+              require(block.timestamp <= dueDate, "Repayment is overdue");
+              payable(lender).transfer(msg.value);
+          }
+      }
+      ```
+
+38. Promotion of ethical business conduct:
+    - The contract should promote ethical business conduct and adherence to high ethical standards.
+    - Example: A business contract that includes a code of ethics or conduct for all parties involved.
+    - Solidity Example:
+      ```solidity
+      // Compliant: Ethical business conduct
+      contract EthicalBusiness {
+          address public owner;
+          string public codeOfEthics;
+
+          constructor(string memory _codeOfEthics) {
+              owner = msg.sender;
+              codeOfEthics = _codeOfEthics;
+          }
+
+          function conductBusiness() public view returns (string memory) {
+              // Business conduct adhering to the code of ethics
+              return "Business conducted ethically";
+          }
+      }
+      ```
+
+39. Inclusivity and non-discrimination:
+    - The contract should promote inclusivity and non-discrimination in business practices.
+    - Example: An employment contract that ensures equal opportunity and non-discrimination based on race, gender, or religion.
+    - Solidity Example:
+      ```solidity
+      // Compliant: Inclusivity and non-discrimination
+      contract InclusiveEmployment {
+          address public employer;
+          address public employee;
+          uint256 public salary;
+          string public role;
+          string public nonDiscriminationPolicy;
+
+          constructor(address _employee, uint256 _salary, string memory _role, string memory _nonDiscriminationPolicy) {
+              employer = msg.sender;
+              employee = _employee;
+              salary = _salary;
+              role = _role;
+              nonDiscriminationPolicy = _nonDiscriminationPolicy;
+          }
+
+          function hire() public {
+              // Ensure hiring practices adhere to the non-discrimination policy
+          }
+
+          function paySalary() public {
+              require(msg.sender == employer, "Only employer can pay salary");
+              payable(employee).transfer(salary);
+          }
+      }
+      ```
+
+40. Clear definition of roles and responsibilities:
+    - The contract should clearly define the roles and responsibilities of all parties to prevent misunderstandings.
+    - Example: A partnership agreement that outlines the specific duties and contributions of each partner.
+    - Solidity Example:
+      ```solidity
+      // Compliant: Clear roles and responsibilities
+      contract PartnershipRoles {
+          address public partner1;
+          address public partner2;
+          string public role1;
+          string public role2;
+
+          constructor(address _partner2, string memory _role1, string memory _role2) {
+              partner1 = msg.sender;
+              partner2 = _partner2;
+              role1 = _role1;
+              role2 = _role2;
+          }
+
+          function defineRoles() public view returns (string memory, string memory) {
+              return (role1, role2);
+          }
+      }
+      ```
+
+41. No speculative sales (bai’ al-gharar):
+    - The contract should not involve sales of items that do not exist or cannot be delivered.
+    - Example: Selling goods that the seller does not own or have the ability to deliver at the time of the contract.
+    - Solidity Example:
+      ```solidity
+      // Not compliant: Speculative sales contract
+      contract SpeculativeSales {
+          address public seller;
+          address public buyer;
+          string public goods;
+          bool public owned;
+
+          constructor(string memory _goods, bool _owned) {
+              seller = msg.sender;
+              goods = _goods;
+              owned = _owned;
+          }
+
+          function sell(address _buyer) public {
+              require(owned, "Goods not owned by seller");
+              buyer = _buyer;
+              // Sale logic
+          }
+      }
+      ```
+
+42. Proper asset ownership (bai’ al-milkiyah):
+    - The contract must involve the sale or lease of assets that the seller actually owns and has the right to sell.
+    - Example: Selling a property that is not legally owned by the seller.
+    - Solidity Example:
+      ```solidity
+      // Compliant: Proper asset ownership
+      contract AssetOwnership {
+          address public owner;
+          string public asset;
+
+          constructor(string memory _asset) {
+              owner = msg.sender;
+              asset = _asset;
+          }
+
+          function transferOwnership(address newOwner) public {
+              require(msg.sender == owner, "Only owner can transfer ownership");
+              owner = newOwner;
+          }
+
+          function sell(address buyer) public {
+              require(msg.sender == owner, "Only owner can sell");
+              // Sale logic
+          }
+      }
+      ```
+
+43. No forward sales without ownership (bai’ al-salam):
+    - Forward sales are allowed only if the seller actually owns the goods being sold and can deliver them at the specified time.
+    - Example: Selling crops that have not yet been planted without proper conditions.
+    - Solidity Example:
+      ```solidity
+      // Compliant: Forward sales with ownership
+      contract ForwardSale {
+          address public seller;
+          address public buyer;
+          string public goods;
+          uint256 public deliveryDate;
+
+          constructor(string memory _goods, uint256 _deliveryDate) {
+              seller = msg.sender;
+              goods = _goods;
+              deliveryDate = _deliveryDate;
+          }
+
+          function sell(address _buyer) public {
+              require(msg.sender == seller, "Only seller can initiate sale");
+              buyer = _buyer;
+              // Forward sale logic
+          }
+
+          function deliver() public {
+              require(block.timestamp >= deliveryDate, "Delivery date not reached");
+              // Delivery logic
+          }
+      }
+      ```
+
+44. Conditions of contract (shurut):
+    - The contract should include all necessary conditions to make it valid and enforceable under Islamic law.
+    - Example: A contract of sale that lacks clear conditions on delivery and payment terms.
+    - Solidity Example:
+      ```solidity
+      // Compliant: Clear conditions of contract
+      contract SalesContract {
+          address public seller;
+          address public buyer;
+          uint256 public price;
+          uint256 public deliveryDate;
+
+          constructor(address _buyer, uint256 _price, uint256 _deliveryDate) {
+              seller = msg.sender;
+              buyer = _buyer;
+              price = _price;
+              deliveryDate = _deliveryDate;
+          }
+
+          function sell() public {
+              require(msg.sender == seller, "Only seller can initiate sale");
+              // Sale logic
+          }
+
+          function deliver() public {
+              require(block.timestamp >= deliveryDate, "Delivery date not reached");
+              // Delivery logic
+          }
+
+          function pay() public payable {
+              require(msg.sender == buyer, "Only buyer can pay");
+              require(msg.value == price, "Incorrect payment amount");
+              payable(seller).transfer(msg.value);
+          }
+      }
+      ```
+
+45. Ethical partnership structures (musharakah and mudarabah):
+    - Partnerships should be structured ethically, with clear terms on profit and loss sharing.
+    - Example: A mudarabah (investment partnership) where the investor unfairly dictates terms that minimize their risk while exposing the manager to higher risk.
+    - Solidity Example:
+      ```solidity
+      // Compliant: Ethical partnership structures
+      contract Mudarabah {
+          address public investor;
+          address public manager;
+          uint256 public investmentAmount;
+          uint256 public profitShareInvestor;
+          uint256 public profitShareManager;
+
+          constructor(address _manager, uint256 _investmentAmount, uint256 _profitShareInvestor, uint256 _profitShareManager) {
+              investor = msg.sender;
+              manager = _manager;
+              investmentAmount = _investmentAmount;
+              profitShareInvestor = _profitShareInvestor;
+              profitShareManager = _profitShareManager;
+          }
+
+          function invest() public payable {
+              require(msg.sender == investor, "Only investor can invest");
+              require(msg.value == investmentAmount, "Incorrect investment amount");
+              // Investment logic
+          }
+
+          function distributeProfits(uint256 totalProfit) public {
+              uint256 profitInvestor = (totalProfit * profitShareInvestor) / 100;
+              uint256 profitManager = (totalProfit * profitShareManager) / 100;
+              payable(investor).transfer(profitInvestor);
+              payable(manager).transfer(profitManager);
+          }
+      }
+      ```
+
+46. No unjust enrichment:
+    - The contract should not result in unjust enrichment of one party at the expense of another.
+    - Example: A loan agreement where the lender gains significantly more than the principal amount lent without any justification.
+    - Solidity Example:
+      ```solidity
+      // Not compliant: Unjust enrichment in loan agreement
+      contract UnjustEnrichment {
+          address public lender;
+          address public borrower;
+          uint256 public principal;
+          uint256 public unjustGain;
+
+          constructor(address _borrower, uint256 _principal, uint256 _unjustGain) {
+              lender = msg.sender;
+              borrower = _borrower;
+              principal = _principal;
+              unjustGain = _unjustGain;
+          }
+
+          function lend() public {
+              // Lend logic
+          }
+
+          function repay() public payable {
+              require(msg.sender == borrower, "Only borrower can repay");
+              require(msg.value == principal + unjustGain, "Incorrect repayment amount");
+              payable(lender).transfer(msg.value);
+          }
+      }
+      ```
+
+47. Permissibility of the object (ma’qood alaih):
+    - The subject matter of the contract must be permissible under Shariah.
+    - Example: Selling prohibited items like alcohol or pork.
+    - Solidity Example:
+      ```solidity
+      // Not compliant: Sale of prohibited items
+      contract ProhibitedSale {
+          address public seller;
+          address public buyer;
+          string public prohibitedItem;
+
+          constructor(string memory _prohibitedItem) {
+              seller = msg.sender;
+              prohibitedItem = _prohibitedItem;
+          }
+
+          function sell(address _buyer) public {
+              buyer = _buyer;
+              // Sale of prohibited item logic
+          }
+      }
+      ```
+
+48. Fair treatment of employees:
+    - Employment contracts should ensure fair treatment, wages, and working conditions.
+    - Example: An employment contract that requires excessive working hours without adequate compensation or rest periods.
+    - Solidity Example:
+      ```solidity
+      // Compliant: Fair employment contract
+      contract FairEmployment {
+          address public employer;
+          address public employee;
+          uint256 public salary;
+          uint256 public workingHours;
+
+          constructor(address _employee, uint256 _salary, uint256 _workingHours) {
+              employer = msg.sender;
+              employee = _employee;
+              salary = _salary;
+              workingHours = _workingHours;
+          }
+
+          function paySalary() public {
+              require(msg.sender == employer, "Only employer can pay salary");
+              payable(employee).transfer(salary);
+          }
+
+          function recordWorkingHours(uint256 hours) public {
+              require(msg.sender == employee, "Only employee can record hours");
+              require(hours <= workingHours, "Excessive working hours not allowed");
+              // Record hours logic
+          }
+      }
+      ```
+
+49. Socially responsible investing (SRI):
+    - Investments should be in socially responsible and ethical industries.
+    - Example: Avoiding investments in industries that harm the environment or public health.
+    - Solidity Example:
+      ```solidity
+      // Compliant: Socially responsible investment
+      contract SocialInvestment {
+          address public investor;
+          address public project;
+          uint256 public amount;
+          string public industry;
+
+          constructor(address _project, uint256 _amount, string memory _industry) {
+              investor = msg.sender;
+              project = _project;
+              amount = _amount;
+              industry = _industry;
+          }
+
+          function invest() public payable {
+              require(msg.value == amount, "Incorrect investment amount");
+              // Ensure investment in ethical industry
+              require(keccak256(abi.encodePacked(industry)) != keccak256(abi.encodePacked("harmful")), "Investment in harmful industry not allowed");
+              payable(project).transfer(amount);
+          }
+      }
+      ```
+
+50. Transparency in partnership agreements:
+    - All terms of the partnership should be transparent and agreed upon by all partners.
+    - Example: A partnership agreement where one partner withholds critical financial information from the others.
+    - Solidity Example:
+      ```solidity
+      // Compliant: Transparent partnership agreement
+      contract TransparentPartnership {
+          address public partner1;
+          address public partner2;
+          mapping(address => string) public financialInformation;
+
+          constructor(address _partner2) {
+              partner1 = msg.sender;
+              partner2 = _partner2;
+          }
+
+          function addFinancialInformation(address partner, string memory info) public {
+              require(msg.sender == partner1 || msg.sender == partner2, "Only partners can add information");
+              financialInformation[partner] = info;
+          }
+
+          function getFinancialInformation(address partner) public view returns (string memory) {
+              return financialInformation[partner];
+          }
+      }
+      ```
+
+51. No involvement in usurious practices (riba al-fadl):
+    - The contract should avoid practices where one party gains an undue advantage over another.
+    - Example: A sale contract involving the exchange of unequal amounts of the same commodity.
+    - Solidity Example:
+      ```solidity
+      // Not compliant: Usurious practice in sale contract
+      contract UsuriousSale {
+          address public seller;
+          address public buyer;
+          uint256 public amount1;
+          uint256 public amount2;
+
+          constructor(uint256 _amount1, uint256 _amount2) {
+              seller = msg.sender;
+              amount1 = _amount1;
+              amount2 = _amount2;
+          }
+
+          function sell(address _buyer) public {
+              buyer = _buyer;
+              require(amount1 == amount2, "Exchange amounts must be equal");
+              // Sale logic
+          }
+      }
+      ```
+
+52. Avoidance of unjust monopolies (ihtikar):
+    - The contract should not create unjust monopolies that exploit consumers.
+    - Example: An exclusive supply agreement that prevents other suppliers from entering the market.
+    - Solidity Example:
+      ```solidity
+      // Not compliant: Unjust monopoly
+      contract UnjustMonopoly {
+          address public supplier;
+          address public exclusiveBuyer;
+          uint256 public price;
+
+          constructor(address _exclusiveBuyer, uint256 _price) {
+              supplier = msg.sender;
+              exclusiveBuyer = _exclusiveBuyer;
+              price = _price;
+          }
+
+          function sell() public {
+              require(msg.sender == supplier, "Only supplier can sell");
+              payable(supplier).transfer(price);
+              // Monopoly logic
+          }
+      }
+      ```
+
+53. Prohibition of haram financial instruments:
+    - The contract should not involve financial instruments that are considered haram, such as conventional insurance products.
+    - Example: Using conventional insurance to hedge against business risks instead of takaful (Islamic insurance).
+    - Solidity Example:
+      ```solidity
+      // Not compliant: Conventional insurance contract
+      contract ConventionalInsurance {
+          address public insured;
+          address public insurer;
+          uint256 public premium;
+
+          constructor(address _insurer, uint256 _premium) {
+              insured = msg.sender;
+              insurer = _insurer;
+              premium = _premium;
+          }
+
+          function payPremium() public payable {
+              require(msg.value == premium, "Incorrect premium amount");
+              payable(insurer).transfer(msg.value);
+          }
+
+          function claim() public {
+              require(msg.sender == insured, "Only insured can claim");
+              // Claim logic
+          }
+      }
+      ```
+
+54. Proper due diligence:
+    - All parties should conduct proper due diligence to ensure the contract is fair and compliant with Shariah.
+    - Example: A merger agreement where one company fails to disclose significant liabilities to the other party.
+    - Solidity Example:
+      ```solidity
+      // Compliant: Proper due diligence in merger agreement
+      contract MergerAgreement {
+          address public company1;
+          address public company2;
+          string public disclosedLiabilities;
+
+          constructor(address _company2, string memory _disclosedLiabilities) {
+              company1 = msg.sender;
+              company2 = _company2;
+              disclosedLiabilities = _disclosedLiabilities;
+          }
+
+          function merge() public view returns (string memory) {
+              // Due diligence logic
+              return disclosedLiabilities;
+          }
+      }
+      ```
+
+55. Avoidance of coercion and duress (ikrah):
+    - The contract must be entered into freely without any form of coercion or duress.
+    - Example: Forcing a party to sign a contract under threat of harm.
+    - Solidity Example:
+      ```solidity
+      // Compliant: Voluntary contract
+      contract VoluntaryContract {
+          address public party1;
+          address public party2;
+          bool public consent1;
+          bool public consent2;
+
+          constructor(address _party2) {
+              party1 = msg.sender;
+              party2 = _party2;
+          }
+
+          function giveConsent() public {
+              if (msg.sender == party1) {
+                  consent1 = true;
+              } else if (msg.sender == party2) {
+                  consent2 = true;
+              }
+          }
+
+          function isValid() public view returns (bool) {
+              return consent1 && consent2;
+          }
+      }
+      ```
+
+56. Ethical financing (Qard al-Hasan):
+    - The contract may involve ethical, interest-free loans where repayment terms are just and charitable.
+    - Example: A loan agreement for community development projects that charges no interest.
+    - Solidity Example:
+      ```solidity
+      // Compliant: Ethical interest-free loan
+      contract QardAlHasan {
+          address public lender;
+          address public borrower;
+          uint256 public principal;
+          uint256 public dueDate;
+
+          constructor(address _borrower, uint256 _principal, uint256 _dueDate) {
+              lender = msg.sender;
+              borrower = _borrower;
+              principal = _principal;
+              dueDate = _dueDate;
+          }
+
+          function lend() public {
+              // Lend logic
+              payable(borrower).transfer(principal);
+          }
+
+          function repay() public payable {
+              require(msg.sender == borrower, "Only borrower can repay");
+              require(msg.value == principal, "Repayment amount must equal principal");
+              require(block.timestamp <= dueDate, "Repayment is overdue");
+              payable(lender).transfer(msg.value);
+          }
+      }
+      ```
+
+57. Prohibition of short selling:
+    - The contract should avoid short selling practices that involve selling borrowed assets.
+    - Example: A trading contract where a party sells shares they have borrowed in anticipation of buying them back at a lower price.
+    - Solidity Example:
+      ```solidity
+      // Not compliant: Short selling contract
+      contract ShortSelling {
+          address public seller;
+          address public lender;
+          uint256 public borrowedShares;
+          uint256 public sellPrice;
+
+          constructor(address _lender, uint256 _borrowedShares, uint256 _sellPrice) {
+              seller = msg.sender;
+              lender = _lender;
+              borrowedShares = _borrowedShares;
+              sellPrice = _sellPrice;
+          }
+
+          function sell() public {
+              require(msg.sender == seller, "Only seller can initiate sale");
+              // Short selling logic
+          }
+
+          function returnShares() public {
+              // Return borrowed shares logic
+          }
+      }
+      ```
+
+58. Clear succession planning:
+    - Contracts involving partnerships or family businesses should include clear succession planning to avoid disputes.
+    - Example: A family business agreement that does not specify how shares will be distributed upon the death of a partner.
+    - Solidity Example:
+      ```solidity
+      // Compliant: Clear succession planning
+      contract FamilyBusiness {
+          address public owner;
+          address public successor;
+          uint256 public shares;
+
+          constructor(address _successor, uint256 _shares) {
+              owner = msg.sender;
+              successor = _successor;
+              shares = _shares;
+          }
+
+          function transferOwnership() public {
+              require(msg.sender == owner, "Only owner can transfer ownership");
+              owner = successor;
+          }
+      }
+      ```
+
+59. No involvement in impermissible contracts (batil contracts):
+    - The contract must not involve any impermissible or void contracts under Shariah.
+    - Example: A contract involving fraudulent misrepresentation or illegal activities.
+    - Solidity Example:
+      ```solidity
+      // Not compliant: Impermissible contract
+      contract ImpermissibleContract {
+          address public party1;
+          address public party2;
+          string public illegalActivity;
+
+          constructor(address _party2, string memory _illegalActivity) {
+              party1 = msg.sender;
+              party2 = _party2;
+              illegalActivity = _illegalActivity;
+          }
+
+          function engage() public {
+              // Engage in impermissible activity
+          }
+      }
+      ```
+
+60. Fair treatment of consumers:
+    - Consumer contracts should ensure fair treatment, transparency, and the provision of accurate information.
+    - Example: A sales contract where the seller provides misleading information about the product.
+    - Solidity Example:
+      ```solidity
+      // Compliant: Fair treatment of consumers
+      contract ConsumerProtection {
+          address public seller;
+          address public buyer;
+          string public productDescription;
+
+          constructor(string memory _productDescription) {
+              seller = msg.sender;
+              productDescription = _productDescription;
+          }
+
+          function sell(address _buyer) public {
+              buyer = _buyer;
+              // Ensure accurate product information
+          }
+      }
+      ```
+
+61. Proper execution of contracts (ijab and qabul):
+    - The contract should be executed with a proper offer and acceptance.
+    - Example: A contract where the acceptance is not clearly communicated or documented.
+    - Solidity Example:
+      ```solidity
+      // Compliant: Proper offer and acceptance
+      contract ProperContract {
+          address public party1;
+          address public party2;
+          bool public offer;
+          bool public acceptance;
+
+          constructor(address _party2) {
+              party1 = msg.sender;
+              party2 = _party2;
+          }
+
+          function makeOffer() public {
+              require(msg.sender == party1, "Only party1 can make offer");
+              offer = true;
+          }
+
+          function acceptOffer() public {
+              require(msg.sender == party2, "Only party2 can accept offer");
+              acceptance = true;
+          }
+
+          function isValid() public view returns (bool) {
+              return offer && acceptance;
+          }
+      }
+      ```
+
+62. Equitable distribution of assets:
+    - In dissolution of partnerships, assets should be distributed equitably among partners.
+    - Example: A partnership dissolution agreement where one partner unfairly receives a larger share of the assets.
+    - Solidity Example:
+      ```solidity
+      // Compliant: Equitable asset distribution
+      contract Dissolution {
+          address public partner1;
+          address public partner2;
+          uint256 public assets;
+          uint256 public share1;
+          uint256 public share2;
+
+          constructor(uint256 _assets, uint256 _share1, uint256 _share2) {
+              partner1 = msg.sender;
+              assets = _assets;
+              share1 = _share1;
+              share2 = _share2;
+          }
+
+          function distribute() public {
+              require(msg.sender == partner1 || msg.sender == partner2, "Only partners can distribute assets");
+              payable(partner1).transfer((assets * share1) / 100);
+              payable(partner2).transfer((assets * share2) / 100);
+          }
+      }
+      ```
+
+63. Avoidance of conditions leading to disputes:
+    - The contract should avoid conditions that are likely to lead to disputes and disagreements.
+    - Example: Ambiguous terms in a rental agreement regarding maintenance responsibilities.
+    - Solidity Example:
+      ```solidity
+      // Compliant: Clear terms to avoid disputes
+      contract RentalAgreement {
+          address public landlord;
+          address public tenant;
+          uint256 public rent;
+          string public maintenanceResponsibilities;
+
+          constructor(address _tenant, uint256 _rent, string memory _maintenanceResponsibilities) {
+              landlord = msg.sender;
+              tenant = _tenant;
+              rent = _rent;
+              maintenanceResponsibilities = _maintenanceResponsibilities;
+          }
+
+          function payRent() public payable {
+              require(msg.value == rent, "Incorrect rent amount");
+              payable(landlord).transfer(msg.value);
+          }
+
+          function getMaintenanceResponsibilities() public view returns (string memory) {
+              return maintenanceResponsibilities;
+          }
+      }
+      ```
+
+64. Adherence to ethical labor practices:
+    - Contracts involving labor should adhere to ethical labor practices, including fair wages and working conditions.
+    - Example: A labor contract that does not comply with labor laws or ethical standards for worker treatment.
+    - Solidity Example:
+      ```solidity
+      // Compliant: Ethical labor practices
+      contract LaborContract {
+          address public employer;
+          address public worker;
+          uint256 public wage;
+          uint256 public workingHours;
+
+          constructor(address _worker, uint256 _wage, uint256 _workingHours) {
+              employer = msg.sender;
+              worker = _worker;
+              wage = _wage;
+              workingHours = _workingHours;
+          }
+
+          function payWage() public {
+              require(msg.sender == employer, "Only employer can pay wage");
+              payable(worker).transfer(wage);
+          }
+
+          function recordWorkingHours(uint256 hours) public {
+              require(msg.sender == worker, "Only worker can record hours");
+              require(hours <= workingHours, "Excessive working hours not allowed");
+              // Record hours logic
+          }
+      }
+      ```
+
+65. Transparency in financial reporting:
+    - Contracts involving financial transactions should include requirements for transparent and accurate financial reporting.
+    - Example: A business contract where financial statements are not regularly audited or disclosed to partners.
+    - Solidity Example:
+      ```solidity
+      // Compliant: Transparent financial reporting
+      contract FinancialReporting {
+          address public owner;
+          mapping(uint256 => string) public financialStatements;
+
+          constructor() {
+              owner = msg.sender;
+          }
+
+          function addStatement(uint256 year, string memory statement) public {
+              require(msg.sender == owner, "Only owner can add statements");
+              financialStatements[year] = statement;
+          }
+
+          function getStatement(uint256 year) public view returns (string memory) {
+              return financialStatements[year];
+          }
+      }
+      ```
+
+
+

@@ -1,17 +1,21 @@
 import openai
 import os
+import json
 from flask import Flask, request, render_template, send_from_directory, redirect, url_for, flash
 from werkzeug.utils import secure_filename
+from dotenv import load_dotenv
 
 # Load environment variables
-from dotenv import load_dotenv
 load_dotenv()
 
-# Set your OpenAI API key securely
+# Set your API keys securely
 openai.api_key = os.getenv('OPENAI_API_KEY')
+ollama_api_key = os.getenv('OLLAMA_API_KEY')
 
 # Constants
 UPLOAD_FOLDER = 'contracts'
+SOLIDITY_FOLDER = 'solidityExamples'
+OUTPUT_FOLDER = 'output'
 ALLOWED_EXTENSIONS = {'sol'}
 MAX_CONTENT_LENGTH = 16 * 1024 * 1024  # 16 MB max file size
 
@@ -24,27 +28,37 @@ app.secret_key = os.getenv('SECRET_KEY')  # Ensure you set this in your .env fil
 with open('criteria.txt', 'r') as file:
     criteria = file.read()
 
+# Load model configuration from config.json
+with open('config.json', 'r') as file:
+    config = json.load(file)
+model_choice = config.get('model', 'gpt-4')
+
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 def evaluate_smart_contract(smart_contract_name, smart_contract_version, smart_contract_content):
-    prompt = f"""
-    Evaluate the following smart contract for Shariah compliance based on the criteria provided:
-    {criteria}
+    if model_choice in ['gpt-3', 'gpt-4']:
+        prompt = f"""
+        Evaluate the following smart contract for Shariah compliance based on the criteria provided:
+        {criteria}
 
-    Smart Contract:
-    {smart_contract_content}
+        Smart Contract:
+        {smart_contract_content}
 
-    Provide a detailed evaluation and conclude if the contract is Shariah compliant or not.
-    """
-    response = openai.Completion.create(
-        model="gpt-4",
-        prompt=prompt,
-        max_tokens=6000,
-        temperature=0.7,
-    )
-    evaluation = response.choices[0].text.strip()
-
+        Provide a detailed evaluation and conclude if the contract is Shariah compliant or not.
+        """
+        response = openai.Completion.create(
+            model=model_choice,
+            prompt=prompt,
+            max_tokens=6000,
+            temperature=0.7,
+        )
+        evaluation = response.choices[0].text.strip()
+    elif model_choice == 'llama3':
+        # Implement Llama3 (Ollama) API call here
+        # Placeholder for Llama3 API integration
+        evaluation = "Llama3 evaluation not implemented yet."
+    
     # Save the result to /audit/{smart_contract_name}+{smart_contract_version}.txt
     audit_filename = secure_filename(f"{smart_contract_name}+{smart_contract_version}.txt")
     audit_path = os.path.join('audit', audit_filename)
@@ -113,9 +127,41 @@ def upload_file():
     
     return render_template('upload.html')
 
+@app.route('/solidity_examples', methods=['GET', 'POST'])
+def solidity_examples():
+    if request.method == 'POST':
+        # Process Solidity examples
+        solidity_files = os.listdir(SOLIDITY_FOLDER)
+        results = []
+        for filename in solidity_files:
+            if allowed_file(filename):
+                with open(os.path.join(SOLIDITY_FOLDER, filename), 'r') as file:
+                    smart_contract_content = file.read()
+                result, _ = evaluate_smart_contract(filename, '1.0', smart_contract_content)
+                output_filename = f"{filename.split('.')[0]}_output.txt"
+                with open(os.path.join(OUTPUT_FOLDER, output_filename), 'w') as output_file:
+                    output_file.write(result)
+                results.append((filename, output_filename))
+        flash('Solidity examples processed successfully')
+        return render_template('solidity_results.html', results=results)
+    return render_template('solidity_examples.html')
+
+@app.route('/update_model', methods=['POST'])
+def update_model():
+    data = request.get_json()
+    model = data.get('model', 'gpt-4')
+    config['model'] = model
+    with open('config.json', 'w') as file:
+        json.dump(config, file)
+    return {'status': 'success', 'model': model}
+
 if __name__ == '__main__':
     if not os.path.exists('audit'):
         os.makedirs('audit')
     if not os.path.exists(app.config['UPLOAD_FOLDER']):
         os.makedirs(app.config['UPLOAD_FOLDER'])
+    if not os.path.exists(SOLIDITY_FOLDER):
+        os.makedirs(SOLIDITY_FOLDER)
+    if not os.path.exists(OUTPUT_FOLDER):
+        os.makedirs(OUTPUT_FOLDER)
     app.run(debug=True)

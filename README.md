@@ -134,5 +134,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ### Acknowledgements
 
-Designed by Dr. Mohammed Al-Jefairi.
 ```

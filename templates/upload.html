@@ -6,19 +6,34 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">Shariah Compliance Checker</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/solidity_examples">Process Solidity Examples</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
     <div class="container">
         <h1 class="mt-5">Upload Smart Contract</h1>
         <form action="/upload" method="post" enctype="multipart/form-data">
             <div class="form-group">
-                <label for="file">Select Smart Contract (.sol file):</label>
+                <label for="file">Choose Solidity File:</label>
                 <input type="file" class="form-control-file" id="file" name="file" required>
             </div>
             <button type="submit" class="btn btn-primary">Upload</button>
         </form>
         <a href="/" class="btn btn-secondary mt-3">Back to Home</a>
     </div>
-    <footer>
-        &copy; 2024 Shariah Compliance Checker
+    <footer class="footer mt-auto py-3 bg-light">
+        <div class="container">
+            <span class="text-muted">&copy; 2024 Shariah Compliance Checker</span>
+        </div>
     </footer>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>

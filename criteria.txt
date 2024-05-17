@@ -1,5 +1,3 @@
-# Define the criteria for Shariah compliance
-criteria = """
 1. No involvement in riba (interest): 
     - The contract must not include any clauses that involve the payment or receipt of interest.
     - Example: A loan agreement where the lender charges interest on the principal amount.
@@ -165,7 +163,9 @@ criteria = """
     - Example: Selling goods that the seller does not own or have the ability to deliver at the time of the contract.
 
 42. Proper asset ownership (bai’ al-milkiyah):
-    - The contract must involve the sale or lease of assets that the seller actually owns and has the right to sell.
+    - The contract must involve the sale or lease of assets that the seller actually owns and has the right to
+
+ sell.
     - Example: Selling a property that is not legally owned by the seller.
 
 43. No forward sales without ownership (bai’ al-salam):
@@ -259,4 +259,3 @@ criteria = """
 65. Transparency in financial reporting:
     - Contracts involving financial transactions should include requirements for transparent and accurate financial reporting.
     - Example: A business contract where financial statements are not regularly audited or disclosed to partners.
-"""

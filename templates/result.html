@@ -1,24 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Compliance Result</title>
+    <title>Shariah Compliance Result</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">Shariah Compliance Checker</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/upload">Upload Contract</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/solidity_examples">Process Solidity Examples</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
     <div class="container">
-        <h1 class="mt-5">Compliance Result</h1>
-        <div class="card mt-3">
+        <h1 class="mt-5">Shariah Compliance Result</h1>
+        <div class="card">
             <div class="card-body">
                 <pre>{{ result }}</pre>
             </div>
         </div>
-        <div class="mt-3">
-            <a href="/" class="btn btn-secondary">Check another contract</a>
-            {% if audit_filename %}
-                <a href="/audit/{{ audit_filename }}" class="btn btn-success">Download Audit Report</a>
-            {% endif %}
-        </div>
+        <a href="{{ url_for('download_audit', filename=audit_filename) }}" class="btn btn-primary mt-3">Download Audit File</a>
+        <a href="/" class="btn btn-secondary mt-3">Back to Home</a>
     </div>
     <footer class="footer mt-auto py-3 bg-light">
         <div class="container">
